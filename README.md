@@ -42,10 +42,8 @@ cd your-repository
 
 # 必要なライブラリをインストール
 pip install torch torchvision pandas numpy
+
 2. 実行例
-bash
-コピーする
-編集する
 python main.py \
     --num_clients 100 \
     --selected_clients 10 \
@@ -54,6 +52,7 @@ python main.py \
     --dirichlet_alpha 0.5 \
     --optimizer adam \
     --lr 0.001
+
 ⚙️ コマンドライン引数一覧 (Arguments)
 引数	デフォルト値	説明
 --batch_size	64	テスト用のバッチサイズ
