@@ -77,41 +77,20 @@ makefile
 編集する
 ./FL_0.5_cohort_10_clients_100_Opt:adam_lr:0.001.csv
 ファイルには以下が含まれます：
-
 各イテレーションにおけるエポックごとの精度
-
 エポックごとの平均精度
 
 📈 実験例と可視化
 このシミュレーターを使えば、以下のような実験が可能です：
-
 データの非IID性（α）の変化による精度への影響
-
 クライアント数・選択数の調整による性能変化
-
 最適化手法や学習率による収束速度の違い
-
 matplotlibなどを用いたCSVファイルの可視化も簡単に行えます。
 
-python
-コピーする
-編集する
-import pandas as pd
-import matplotlib.pyplot as plt
 
-df = pd.read_csv("FL_0.5_cohort_10_clients_100_Opt:adam_lr:0.001.csv")
-df["AverageAccuracy"].plot()
-plt.title("Global Model Accuracy over Epochs")
-plt.xlabel("Epoch")
-plt.ylabel("Accuracy (%)")
-plt.grid(True)
-plt.show()
 🔍 今後の拡張アイデア (Future Work)
 異なるモデル構造（CNNなど）への対応
-
 クライアント側での早期停止の実装
-
 通信オーバーヘッドの計測
-
 重み付き平均以外の集約手法（例: Krum, Trimmed Mean）
 
