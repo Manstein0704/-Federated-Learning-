@@ -42,7 +42,7 @@ git clone https://github.com/Manstein0704/your-repository.git
 cd your-repository
 
 # 必要なライブラリをインストール
-pip install torch torchvision pandas numpy
+pip install -r requirements.txt
 
 2. 実行例
 python main.py \
