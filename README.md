@@ -1,97 +1,117 @@
-🚀 PyTorchによる連合学習(FedAvg)シミュレーター
-📝 概要 (Overview)
-これは、PyTorchを用いて連合学習（Federated Learning, FL）の代表的なアルゴリズムである Federated Averaging (FedAvg) を実装したシミュレーターです。
+# 🚀 PyTorchによる連合学習(FedAvg)シミュレーター
 
-プライバシーを保護しながら分散したデータで機械学習モデルを訓練する連合学習の挙動を、特にクライアント間のデータ分布が不均一なNon-IID（非独立同一分布）環境において検証することを目的としています。
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-✨ 主な特徴 (Features)
-FedAvgアルゴリズム: 連合学習の基本的なアルゴリズムを忠実に実装。
+## 📝 概要 (Overview)
+これは、**PyTorch**を用いて連合学習（Federated Learning, FL）の代表的なアルゴリズムである **Federated Averaging (FedAvg)** を実装したシミュレーターです。
 
-Non-IIDデータ分割: ディリクレ分布 (Dirichlet distribution) を用いて、クライアント間のデータ分布の偏り（不均一性）を柔軟にシミュレート可能。
+プライバシーを保護しながら分散したデータで機械学習モデルを訓練する連合学習の挙動を、特にクライアント間のデータ分布が不均一な**Non-IID（非独立同一分布）環境**において検証することを目的としています。
 
-最適化手法の選択: Adam と SGD の2つの最適化手法をコマンドラインから簡単に切り替えて実験可能。
+---
 
-高い再現性: 乱数シードを完全に固定し、誰が実行しても同じ結果が得られる実験環境を構築。
+## ✨ 主な特徴 (Features)
+* **FedAvgアルゴリズム:** 連合学習の基本的なアルゴリズムを忠実に実装。
+* **Non-IIDデータ分割:** ディリクレ分布 (`Dirichlet distribution`) を用いて、クライアント間のデータ分布の偏り（不均一性）を柔軟にシミュレート可能。
+* **最適化手法の選択:** `Adam` と `SGD` の2つの最適化手法をコマンドラインから簡単に切り替えて実験可能。
+* **高い再現性:** 乱数シードを完全に固定し、誰が実行しても同じ結果が得られる実験環境を構築。
+* **柔軟な実験設定:** `argparse`により、クライアント数、学習率、Non-IIDの度合い (`alpha`) などのハイパーパラメータをコマンドラインから簡単に変更可能。
+* **結果の自動保存:** 各エポックのグローバルモデルの精度を`pandas`で集計し、CSVファイルとして自動で出力。
 
-柔軟な実験設定: argparseにより、クライアント数、学習率、Non-IIDの度合い (alpha) などのハイパーパラメータをコマンドラインから簡単に変更可能。
+---
 
-結果の自動保存: 各エポックのグローバルモデルの精度をpandasで集計し、CSVファイルとして自動で出力。
+## 🛠️ 技術スタック (Tech Stack)
+* **Core:** Python 3.9+
+* **Machine Learning:** PyTorch 2.0+
+* **Data Handling:** NumPy, Pandas
+* **Dataset:** MNIST (from torchvision)
 
-🛠️ 技術スタック (Tech Stack)
-Core: Python 3.9
+---
 
-Machine Learning: PyTorch
+## 📦 セットアップと実行方法 (Installation & Usage)
 
-Data Handling: NumPy, Pandas
+### 1. 準備
 
-Dataset: MNIST
-
-📦 セットアップと実行方法 (Installation & Usage)
-1. 準備
 まず、リポジトリをクローンし、必要なライブラリをインストールします。
-（your-repositoryの部分は、実際のリポジトリ名に書き換えてください）
 
-Bash
-
+```bash
 # リポジトリをクローン
 git clone https://github.com/Manstein0704/your-repository.git
 cd your-repository
 
 # 必要なライブラリをインストール
 pip install torch torchvision pandas numpy
-2. 実行
-以下のコマンドで学習を開始します。--optimizer 引数で adam または sgd を指定できます。
+2. 実行例
+bash
+コピーする
+編集する
+python main.py \
+    --num_clients 100 \
+    --selected_clients 10 \
+    --epochs 50 \
+    --local_epochs 1 \
+    --dirichlet_alpha 0.5 \
+    --optimizer adam \
+    --lr 0.001
+⚙️ コマンドライン引数一覧 (Arguments)
+引数	デフォルト値	説明
+--batch_size	64	テスト用のバッチサイズ
+--train_batch_size	64	各クライアントでのトレーニング時のバッチサイズ
+--num_clients	128	クライアントの総数
+--selected_clients	16	各エポックで選択されるクライアントの数
+--epochs	100	エポック数（通信ラウンド数）
+--local_epochs	1	各クライアントでのローカルトレーニングの回数
+--dirichlet_alpha	1e21	ディリクレ分布のαパラメータ（小さいほどNon-IIDが強くなる）
+--optimizer	"adam"	adam または sgd
+--lr	0.0001	学習率
+--momentum	0	SGD使用時のモメンタム係数
 
-Adamを使用する場合 (デフォルト):
+📊 出力結果
+実行が完了すると、各エポックでのテスト精度を記録したCSVファイルが自動生成されます。
 
-Bash
+例:
 
-python main.py --epochs 50 --num_clients 100 --selected_clients 10 --lr 0.001 --dirichlet_alpha 0.5 --optimizer adam
-SGDを使用する場合:
+makefile
+コピーする
+編集する
+./FL_0.5_cohort_10_clients_100_Opt:adam_lr:0.001.csv
+ファイルには以下が含まれます：
 
-Bash
+各イテレーションにおけるエポックごとの精度
 
-python main.py --epochs 50 --num_clients 100 --selected_clients 10 --lr 0.01 --dirichlet_alpha 0.5 --optimizer sgd
-主な引数:
+エポックごとの平均精度
 
---epochs: グローバルな学習ラウンド数
+📈 実験例と可視化
+このシミュレーターを使えば、以下のような実験が可能です：
 
---num_clients: 総クライアント数
+データの非IID性（α）の変化による精度への影響
 
---selected_clients: 毎ラウンドで学習に参加するクライアント数
+クライアント数・選択数の調整による性能変化
 
---dirichlet_alpha: データの不均一性を制御（値が小さいほどNon-IID性が強くなる）
+最適化手法や学習率による収束速度の違い
 
---optimizer: adam または sgd を選択
+matplotlibなどを用いたCSVファイルの可視化も簡単に行えます。
 
---lr: 学習率
+python
+コピーする
+編集する
+import pandas as pd
+import matplotlib.pyplot as plt
 
-引数の詳細は --help で確認できます。
+df = pd.read_csv("FL_0.5_cohort_10_clients_100_Opt:adam_lr:0.001.csv")
+df["AverageAccuracy"].plot()
+plt.title("Global Model Accuracy over Epochs")
+plt.xlabel("Epoch")
+plt.ylabel("Accuracy (%)")
+plt.grid(True)
+plt.show()
+🔍 今後の拡張アイデア (Future Work)
+異なるモデル構造（CNNなど）への対応
 
-Bash
+クライアント側での早期停止の実装
 
-python main.py --help
-学習が完了すると、実行時のパラメータに基づいたファイル名（例: FL_0.5_cohort_10_clients_100_Opt:adam_lr:0.001.csv）で結果が保存されます。
+通信オーバーヘッドの計測
 
-💡 工夫した点・設計思想 (Key Learnings & Design Choices)
-このプロジェクトでは、単にアルゴリズムを実装するだけでなく、研究や開発に応用できるような、より実践的で信頼性の高いシミュレーターを目指しました。
+重み付き平均以外の集約手法（例: Krum, Trimmed Mean）
 
-現実的なシナリオの追求 (Non-IID環境):
-実際の連合学習では、各ユーザー（クライアント）が持つデータは偏っているのが普通です。この偏り（Non-IID性）がモデルの学習にどう影響するかを検証するため、ディリクレ分布を採用しました。alphaパラメータを調整することで、全クライアントがほぼ同じデータを持つIIDな状況から、特定の数字しか持たない極端なNon-IIDまで、様々なシナリオを再現できます。
-
-科学的検証のための再現性:
-機械学習の実験において、再現性は極めて重要です。このシミュレーターでは、torch, numpy, random の全ての乱数シードを固定し、cuDNNの決定的動作を有効にすることで、誰がどの環境で実行しても同じ学習結果が得られるように設計しました。これにより、ハイパーパラメータ変更の影響だけを純粋に評価することが可能になります。
-
-拡張性と柔軟性の確保:
-argparseを全面的に採用することで、コードを直接変更することなく、様々な条件下での実験を簡単に行えるようにしました。これにより、「オプティマイザの違いによる収束性の比較」や「クライアント数が増えると収束速度はどうなるか？」といった問いに対する体系的な分析が容易になります。この設計は、将来的に新しいアルゴリズムやモデルを追加する際の拡張性も考慮しています。
-
-🌱 今後の展望 (Future Work)
-[ ] FedAvg以外の連合学習アルゴリズム（FedProx, SCAFFOLDなど）の実装
-
-[ ] CNNなど、より複雑なモデルへの対応
-
-[ ] CIFAR-10など、MNIST以外のデータセットへの対応
-
-[ ] クライアントの通信コストや計算コストのシミュレーション機能
-
-[ ] 実験結果を自動で可視化（グラフ描画）する機能の追加
