@@ -5,7 +5,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![Federated Accuracy](images/federated_accuracy.png)
+
 
 ## 📝 概要 (Overview)
 これは、**PyTorch**を用いて連合学習（Federated Learning, FL）の代表的なアルゴリズムである **Federated Averaging (FedAvg)** を実装したシミュレーターです。
@@ -55,6 +55,7 @@ python main.py \
     --dirichlet_alpha 0.5 \
     --optimizer adam \
     --lr 0.001
+```
 
 ⚙️ コマンドライン引数一覧 (Arguments)
 引数	デフォルト値	説明
