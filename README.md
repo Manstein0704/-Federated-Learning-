@@ -97,7 +97,7 @@ CSV には以下が含まれます：
 
 可視化例（CSV → matplotlib）：
 
-![Federated Accuracy](images/federated_accuracy.png)
+![Federated Accuracy](images/federated_accuracy_multi.png)
 
 ---
 
