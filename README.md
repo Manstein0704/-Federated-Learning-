@@ -36,7 +36,7 @@
 
 まず、リポジトリをクローンし、必要なライブラリをインストールします。
 
-```bash
+
 # リポジトリをクローン
 git clone https://github.com/Manstein0704/your-repository.git
 cd your-repository
