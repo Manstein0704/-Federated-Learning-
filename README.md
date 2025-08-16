@@ -82,7 +82,7 @@ python main.py \
 クライアント数・選択数の調整による性能変化
 最適化手法や学習率による収束速度の違い
 matplotlibなどを用いたCSVファイルの可視化も簡単に行えます。
-<img width="1120" height="700" alt="federated_accuracy" src="https://github.com/user-attachments/assets/c1f0127d-7fc3-49e1-8fcd-e21f51279f51" />
+
 
 
 🔍 今後の拡張アイデア (Future Work)
