@@ -82,6 +82,7 @@ python main.py \
 クライアント数・選択数の調整による性能変化
 最適化手法や学習率による収束速度の違い
 matplotlibなどを用いたCSVファイルの可視化も簡単に行えます。
+<img width="1120" height="700" alt="federated_accuracy" src="https://github.com/user-attachments/assets/c1f0127d-7fc3-49e1-8fcd-e21f51279f51" />
 
 
 🔍 今後の拡張アイデア (Future Work)
@@ -89,5 +90,5 @@ matplotlibなどを用いたCSVファイルの可視化も簡単に行えます�
 クライアント側での早期停止の実装
 通信オーバーヘッドの計測
 重み付き平均以外の集約手法（例: Krum, Trimmed Mean）
-<img width="1120" height="700" alt="federated_accuracy" src="https://github.com/user-attachments/assets/707550d3-4b01-4dba-bdc9-c177d8c21428" />
+
 
