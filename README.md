@@ -83,6 +83,7 @@ python main.py \
 最適化手法や学習率による収束速度の違い
 matplotlibなどを用いたCSVファイルの可視化も簡単に行えます。
 ![Federated Accuracy](images/federated_accuracy.png)
+<img width="1120" height="700" alt="federated_accuracy" src="https://github.com/user-attachments/assets/33195b2a-453a-4435-bfd6-53967982fb6e" />
 
 
 
